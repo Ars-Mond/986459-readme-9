@@ -1,7 +1,94 @@
 <?php
+# 
 $is_auth = rand(0, 1);
 
 $user_name = 'Geogia'; // укажите здесь ваше имя
+
+$posts = [
+	[
+		'title' => 'Цитата',
+		'type' => 'post-quote',
+		'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
+		'user_name' => 'Лариса',
+		'profile-picture' => 'userpic-larisa-small.jpg'
+	],
+	[
+		'title' => 'Игра престолов',
+		'type' => 'post-text',
+		'content' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+		'user_name' => 'Владик',
+		'profile-picture' => 'userpic.jpg'
+	],
+	[
+		'title' => 'Наконец, обработал фотки!',
+		'type' => 'post-photo',
+		'content' => 'rock-medium.jpg',
+		'user_name' => 'Виктор',
+		'profile-picture' => 'userpic-mark.jpg'
+	],
+	[
+		'title' => 'Моя мечта',
+		'type' => 'post-photo',
+		'content' => 'coast-medium.jpg',
+		'user_name' => 'Лариса',
+		'profile-picture' => 'userpic-larisa-small.jpg'
+	],
+	[
+		'title' => 'Лучшие курсы',
+		'type' => 'post-link',
+		'content' => 'www.htmlacademy.ru',
+		'user_name' => 'Владик',
+		'profile-picture' => 'userpic.jpg'
+	]
+];
+
+function get_post_quote_content($post){
+	return '<blockquote>
+                    <p> ' . $post['content'] . ' </p>
+                    <cite>Неизвестный Автор</cite>
+                </blockquote>';
+}
+function get_post_link_content($post){
+	return '<div class="post-link__wrapper">
+                    <a class="post-link__external" href="http://" title="Перейти по ссылке">
+                        <div class="post-link__info-wrapper">
+                            <div class="post-link__icon-wrapper">
+                                <img src="img/logo-vita.jpg" alt="Иконка">
+                            </div>
+                            <div class="post-link__info">
+                                <h3>' . $post['title'] . '</h3>
+                            </div>
+                        </div>
+                        <span>' . $post['content'] . '</span>
+                    </a>
+                </div>';
+}
+function get_post_photo_content($post){
+	return '<div class="post-photo__image-wrapper">
+                    <img src="img/' . $post['content'] . '" alt="Фото от пользователя" width="360" height="240">
+                </div>';
+}
+function get_post_text_content($post){
+	 return '<p>' . $post['content'] . '</p>';
+}
+
+function get_post_content_by_type($post){
+	if ($post['type'] === 'post-quote') {
+		return get_post_quote_content($post);
+	}
+	elseif ($post['type'] === 'post-photo') {
+		return get_post_photo_content($post);
+	}
+	elseif ($post['type'] === 'post-text') {
+		return get_post_text_content($post);
+	}
+	elseif ($post['type'] === 'post-link') {
+		return get_post_link_content($post);
+	}
+	else {
+		return 'Error: File not Found';
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -41,7 +128,7 @@ $user_name = 'Geogia'; // укажите здесь ваше имя
         </form>
         <div class="header__nav-wrapper">
             <!-- здесь должен быть PHP код, который показывает следующий тег по условию -->
-            <?php if ($is_auth == 1): ?>
+            <?php if ($is_auth === 1): ?>
             <nav class="header__nav">
                 <ul class="header__my-nav">
                     <li class="header__my-page header__my-page--popular">
@@ -209,6 +296,7 @@ $user_name = 'Geogia'; // укажите здесь ваше имя
                 </ul>
             </div>
         </div>
+        <!-- -------------- -->
         <div class="popular__posts">
             <div class="visually-hidden" id="donor">
                 <!--содержимое для поста-цитаты-->
@@ -241,24 +329,26 @@ $user_name = 'Geogia'; // укажите здесь ваше имя
 
                 <!--содержимое для поста-текста-->
                 <p><!--здесь текст--></p>
-            </div>
 
+            </div>
+            <?php foreach ($posts as $post): ?>
             <article class="popular__post post">
                 <header class="post__header">
-                    <h2><!--здесь заголовок--></h2>
+                    <h2><?php echo $post['title'] ?></h2>
                 </header>
                 <div class="post__main">
                     <!--здесь содержимое карточки-->
+                    <?php echo get_post_content_by_type($post); ?>
                 </div>
                 <footer class="post__footer">
                     <div class="post__author">
                         <a class="post__author-link" href="#" title="Автор">
                             <div class="post__avatar-wrapper">
                                 <!--укажите путь к файлу аватара-->
-                                <img class="post__author-avatar" src="img/" alt="Аватар пользователя">
+                                <?php echo '<img class="post__author-avatar" src="img/' . $post['profile-picture'] . '" alt="Аватар пользователя">'; ?>
                             </div>
                             <div class="post__info">
-                                <b class="post__author-name"><!--здесь имя пользоателя--></b>
+                                <b class="post__author-name"><?php echo $post['user_name']; ?></b>
                                 <time class="post__time" datetime="">дата</time>
                             </div>
                         </a>
@@ -286,6 +376,7 @@ $user_name = 'Geogia'; // укажите здесь ваше имя
                     </div>
                 </footer>
             </article>
+        <?php endforeach; ?>
         </div>
     </div>
 </section>
