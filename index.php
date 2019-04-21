@@ -15,7 +15,7 @@ $posts = [
 	[
 		'title' => 'Игра престолов',
 		'type' => 'post-text',
-		'content' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+		'content' => 'Не могу дождаться начала финального сезона своего любимого сериала! Значимость этих проблем настолько очевидна, что рамки и место обучения кадров требуют от нас анализа соответствующий условий активизации. Товарищи! консультация с широким активом требуют от нас анализа существенных финансовых и административных условий. Таким образом консультация с широким активом способствует подготовки и реализации дальнейших направлений развития.',
 		'user_name' => 'Владик',
 		'profile-picture' => 'userpic.jpg'
 	],
@@ -69,7 +69,7 @@ function get_post_photo_content($post){
                 </div>';
 }
 function get_post_text_content($post){
-	 return '<p>' . $post['content'] . '</p>';
+	 return break_text($post['content'], 300);
 }
 
 function get_post_content_by_type($post){
@@ -89,6 +89,18 @@ function get_post_content_by_type($post){
 		return 'Error: File not Found';
 	}
 }
+
+function break_text($str, $value) {
+	if (mb_strlen($str, 'UTF-8') > $value) {
+		$str = mb_substr($str, 0, $value, 'UTF-8');
+		$str = mb_substr($str, 0, mb_strrpos($str, ' ', 'UTF-8'), 'UTF-8');
+		return '<p>' . $str . '... ' . '</p>' . '<a class="post-text__more-link" href="#">Читать далее</a>';
+	}
+	else {
+		return '<p>' . $str . '</p>';
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
