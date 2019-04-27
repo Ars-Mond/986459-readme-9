@@ -86,40 +86,13 @@
         </div>
         <!-- -------------- -->
         <div class="popular__posts">
-            <div class="visually-hidden" id="donor">
-                <!--содержимое для поста-цитаты-->
-                <blockquote>
-                    <p>
-                        <!--здесь текст-->
-                    </p>
-                    <cite>Неизвестный Автор</cite>
-                </blockquote>
-
-                <!--содержимое для поста-ссылки-->
-                <div class="post-link__wrapper">
-                    <a class="post-link__external" href="http://" title="Перейти по ссылке">
-                        <div class="post-link__info-wrapper">
-                            <div class="post-link__icon-wrapper">
-                                <img src="img/logo-vita.jpg" alt="Иконка">
-                            </div>
-                            <div class="post-link__info">
-                                <h3><!--здесь заголовок--></h3>
-                            </div>
-                        </div>
-                        <span><!--здесь ссылка--></span>
-                    </a>
-                </div>
-
-                <!--содержимое для поста-фото-->
-                <div class="post-photo__image-wrapper">
-                    <img src="img/" alt="Фото от пользователя" width="360" height="240">
-                </div>
-
-                <!--содержимое для поста-текста-->
-                <p><!--здесь текст--></p>
-
-            </div>
-            <?php foreach ($posts as $post): ?>
+            <?php foreach ($posts as $i => $post): ?>
+            <?php
+                $date = generate_random_date($i);
+                $postTime = strtotime($date);
+                $currentTime = time();
+                $diff = $currentTime - $postTime;
+            ?>
             <article class="popular__post post">
                 <header class="post__header">
                     <h2><?php echo $post['title'] ?></h2>
@@ -136,8 +109,8 @@
                                 <?php echo '<img class="post__author-avatar" src="img/' . $post['profile-picture'] . '" alt="Аватар пользователя">'; ?>
                             </div>
                             <div class="post__info">
-                                <b class="post__author-name"><?php echo $post['user_name']; ?></b>
-                                <time class="post__time" datetime="">дата</time>
+                                <b class="post__author-name"> <?php echo $post['user_name']; ?> </b>
+                                <time class="post__time" datetime="<?php echo $date; ?>" title="<?php echo date('d.m.Y H:i', $postTime); ?>"><?php echo get_date_format($diff) . ' назад'; ?></time>
                             </div>
                         </a>
                     </div>
@@ -164,7 +137,7 @@
                     </div>
                 </footer>
             </article>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

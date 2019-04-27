@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/London');
 $is_auth = 1;
 
 $user_name = 'Geogia'; // укажите здесь ваше имя

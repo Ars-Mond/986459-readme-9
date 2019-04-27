@@ -57,3 +57,53 @@ function break_text($str, $value) {
 		return '<p>' . $str . '</p>';
 	}
 }
+
+/**
+ * Возвращает время или дату разнецы
+ *
+ * Пример использования:
+ * 
+ * 
+ *
+ * @param int $time_unix Разница времяни (между датами) 
+ * 
+ * @return string 
+ */
+function get_date_format(int $time_unix): string 
+{
+	if (($time_unix / 60) < 60) {
+
+		$time_unix_temp = floor($time_unix / 60);
+
+		return  $time_unix_temp . ' ' . get_noun_plural_form($time_unix_temp, 'минута', 'минуты', 'минут');
+
+	}
+	else if (($time_unix / 60) >= 60 && ($time_unix / 3600) < 24) {
+
+		$time_unix_temp = floor($time_unix / 3600);
+
+		return  $time_unix_temp . ' ' . get_noun_plural_form($time_unix_temp, 'час', 'часа', 'часов');
+
+	}
+	else if (($time_unix / 3600) >= 24 && ($time_unix / 86400) < 7) {
+
+		$time_unix_temp = floor($time_unix / 86400);
+
+		return  $time_unix_temp . ' ' . get_noun_plural_form($time_unix_temp, 'день', 'дня', 'дней');
+
+	}
+	else if (($time_unix / 86400) >= 7 && ($time_unix / 604800) < 5) {
+
+		$time_unix_temp = floor($time_unix / 604800);
+
+		return  $time_unix_temp . ' ' . get_noun_plural_form($time_unix_temp, 'неделя', 'недели', 'недель');
+
+	}
+	else if (($time_unix / 604800) >= 5) {
+
+		$time_unix_temp = floor($time_unix / 2629743);
+
+		return  $time_unix_temp . ' ' . get_noun_plural_form($time_unix_temp, 'месяц', 'месяца', 'месяцев');
+
+	}
+}
