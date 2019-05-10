@@ -23,9 +23,10 @@ INSERT INTO comments SET user_id = 1, post_id = 5, content = "Я очень си
 /*
 Получаю список постов с сортировкой по популярности и вместе с именами авторов и типом контента
 */
-SELECT u.id, u.name, ps.title, ps.text, ps.author, ps.photo, ps.video, ps.link, ps.views, ps.created_at
+SELECT u.id, u.name, tc.name, ps.title, ps.text, ps.author, ps.photo, ps.video, ps.link, ps.views, ps.created_at
 FROM posts ps
 INNER JOIN users u ON  ps.user_id = u.id
+INNER JOIN type_content tc ON ps.type_id = tc.id
 ORDER BY views DESC;
 
 /*
