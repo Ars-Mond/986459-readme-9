@@ -5,11 +5,11 @@ INSERT INTO type_content SET id = 3, name = "Картинка", class_name = "po
 INSERT INTO type_content SET id = 4, name = "Видео", class_name = "post-video"; 
 INSERT INTO type_content SET id = 5, name = "Ссылка", class_name = "post-link"; 
 
-INSERT INTO users SET id = 1, email = "lariska@gmail.com", login = "lariska", password = "341be97d9aff90c9978347f66f945b77", name = "Лариса", created_at = UNIX_TIMESTAMP();
-INSERT INTO users SET id = 2, email = "vlada_net@mama.com", login = "vlados", password = "341be97d9aff90c9978347f66f945b77", name = "Владик", created_at = UNIX_TIMESTAMP();
-INSERT INTO users SET id = 3, email = "viktor@cs_go.studio", login = "vika_shmika", password = "341be97d9aff90c9978347f66f945b77", name = "Виктор", created_at = UNIX_TIMESTAMP();
+INSERT INTO users SET id = 1, email = "lariska@gmail.com", login = "lariska", password = "341be97d9aff90c9978347f66f945b77", name = "Лариса", avatar = "userpic-larisa-small.jpg", created_at = UNIX_TIMESTAMP();
+INSERT INTO users SET id = 2, email = "vlada_net@mama.com", login = "vlados", password = "341be97d9aff90c9978347f66f945b77", name = "Владик", avatar = "userpic.jpg", created_at = UNIX_TIMESTAMP();
+INSERT INTO users SET id = 3, email = "viktor@cs_go.studio", login = "vika_shmika", password = "341be97d9aff90c9978347f66f945b77", name = "Виктор", avatar = "userpic-mark.jpg", created_at = UNIX_TIMESTAMP();
 
-INSERT INTO posts SET id = 1, user_id = 1, type_id = 2, title = "Цитата", text = "Мы в жизни любим только раз, а после ищем лишь похожих", author = "I", views = 24365, created_at = UNIX_TIMESTAMP();
+INSERT INTO posts SET id = 1, user_id = 1, type_id = 2, title = "Цитата", text = "Мы в жизни любим только раз, а после ищем лишь похожих", author = "Неизвестный Автор", views = 24365, created_at = UNIX_TIMESTAMP();
 INSERT INTO posts SET id = 2, user_id = 2, type_id = 1, title = "Игра престолов", text = "Не могу дождаться начала финального сезона своего любимого сериала! Значимость этих проблем настолько очевидна, что рамки и место обучения кадров требуют от нас анализа соответствующий условий активизации.", views = 12436, created_at = UNIX_TIMESTAMP();
 INSERT INTO posts SET id = 3, user_id = 3, type_id = 3, title = "Наконец, обработал фотки!", photo = "rock-medium.jpg", views = 2365, created_at = UNIX_TIMESTAMP();
 INSERT INTO posts SET id = 4, user_id = 1, type_id = 3, title = "Моя мечта", photo = "coast-medium.jpg", views = 4365, created_at = UNIX_TIMESTAMP();

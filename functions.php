@@ -1,10 +1,12 @@
 <?php
+
 function get_post_quote_content($post){
 	return '<blockquote>
-                    <p> ' . $post['content'] . ' </p>
-                    <cite>Неизвестный Автор</cite>
+                    <p> ' . $post['text'] . ' </p>
+                    <cite>' . $post['author'] . '</cite>
                 </blockquote>';
 }
+
 function get_post_link_content($post){
 	return '<div class="post-link__wrapper">
                     <a class="post-link__external" href="http://" title="Перейти по ссылке">
@@ -16,30 +18,31 @@ function get_post_link_content($post){
                                 <h3>' . $post['title'] . '</h3>
                             </div>
                         </div>
-                        <span>' . $post['content'] . '</span>
+                        <span>' . $post['link'] . '</span>
                     </a>
                 </div>';
 }
+
 function get_post_photo_content($post){
 	return '<div class="post-photo__image-wrapper">
-                    <img src="img/' . $post['content'] . '" alt="Фото от пользователя" width="360" height="240">
+                    <img src="img/' . $post['photo'] . '" alt="Фото от пользователя" width="360" height="240">
                 </div>';
 }
 function get_post_text_content($post){
-	 return break_text($post['content'], 300);
+	 return break_text($post['text'], 300);
 }
 
-function get_post_content_by_type($post){
-	if ($post['type'] === 'post-quote') {
+function get_post_content_by_type($post, $types){
+	if ($types[$post['type_id']]['class_name'] === 'post-quote') {
 		return get_post_quote_content($post);
 	}
-	elseif ($post['type'] === 'post-photo') {
+	elseif ($types[$post['type_id']]['class_name'] === 'post-photo') {
 		return get_post_photo_content($post);
 	}
-	elseif ($post['type'] === 'post-text') {
+	elseif ($types[$post['type_id']]['class_name'] === 'post-text') {
 		return get_post_text_content($post);
 	}
-	elseif ($post['type'] === 'post-link') {
+	elseif ($types[$post['type_id']]['class_name'] === 'post-link') {
 		return get_post_link_content($post);
 	}
 	else {

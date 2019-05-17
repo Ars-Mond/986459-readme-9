@@ -99,17 +99,17 @@
                 </header>
                 <div class="post__main">
                     <!--здесь содержимое карточки-->
-                    <?php echo get_post_content_by_type($post); ?>
+                    <?php echo get_post_content_by_type($post, $types); ?>
                 </div>
                 <footer class="post__footer">
                     <div class="post__author">
                         <a class="post__author-link" href="#" title="Автор">
                             <div class="post__avatar-wrapper">
                                 <!--укажите путь к файлу аватара-->
-                                <?php echo '<img class="post__author-avatar" src="img/' . $post['profile-picture'] . '" alt="Аватар пользователя">'; ?>
+                                <?php echo '<img class="post__author-avatar" src="img/' . $post['avatar'] . '" alt="Аватар пользователя">'; ?>
                             </div>
                             <div class="post__info">
-                                <b class="post__author-name"> <?php echo $post['user_name']; ?> </b>
+                                <b class="post__author-name"> <?php echo $post['`name']; ?> </b>
                                 <time class="post__time" datetime="<?php echo $date; ?>" title="<?php echo date('d.m.Y H:i', $postTime); ?>"><?php echo get_date_format($diff) . ' назад'; ?></time>
                             </div>
                         </a>
